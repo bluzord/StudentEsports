@@ -3,8 +3,6 @@ import { defineComponent } from 'vue'
 import { AppHeader } from '@/widgets/header'
 import { AppFooter } from '@/widgets/footer'
 
-import './styles/index.scss'
-
 export default defineComponent({
   components: {
     AppHeader,
@@ -19,4 +17,4 @@ export default defineComponent({
   <AppFooter />
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss"></style>

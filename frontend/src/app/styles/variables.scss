@@ -1,0 +1,16 @@
+:root {
+  --color-dark: #292929;
+  --color-light: #ededed;
+  --color-accent: #ffae00;
+  --color-accent-alt: #ffe700;
+
+  --gradient: linear-gradient(90deg, rgba(255, 174, 0, 1) 0%, rgba(255, 231, 0, 1) 100%);
+
+  --border: 4px solid transparent;
+  --border-image: var(--gradient);
+  --border-radius: 14px;
+  --border-radius-small: 7px;
+  --border-radius-large: 45px;
+
+  --transition-duration: 0.3s;
+}
