@@ -18,25 +18,28 @@ export default defineComponent({
 
   color: var(--color-white);
 
-  font-weight: bold;
-
-  border: var(--border);
+  border: 4px solid var(--color-accent-alt);
   border-radius: var(--border-radius);
-  background:
-    linear-gradient(var(--color-dark), var(--color-dark)) padding-box,
-    var(--gradient) border-box;
 
   padding: 10px;
 
+  transition:
+    border 0.3s ease,
+    background-color 0.3s ease;
+
   &:hover,
   &:focus {
-    background: var(--gradient) border-box;
+    background-color: var(--color-accent-alt);
     color: var(--color-dark);
     outline: none;
+    cursor: pointer;
   }
 
   &:active {
-    background: var(--color-accent);
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    border: 4px solid var(--color-accent);
+    cursor: pointer;
   }
 }
 </style>

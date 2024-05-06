@@ -2,19 +2,27 @@
 import { defineComponent } from 'vue'
 import { AppHeader } from '@/widgets/header'
 import { AppFooter } from '@/widgets/footer'
+import { MobileOverlay } from '@/widgets/overlay'
 
 export default defineComponent({
   components: {
     AppHeader,
-    AppFooter
+    AppFooter,
+    MobileOverlay
   }
 })
 </script>
 
 <template>
   <AppHeader />
+  <main class="main"></main>
   <RouterView />
   <AppFooter />
+  <MobileOverlay />
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.main {
+  min-height: 100%;
+}
+</style>
