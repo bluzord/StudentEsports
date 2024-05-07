@@ -1,28 +1,23 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { AppHeader } from '@/widgets/header'
 import { AppFooter } from '@/widgets/footer'
 import { MobileOverlay } from '@/widgets/overlay'
-
-export default defineComponent({
-  components: {
-    AppHeader,
-    AppFooter,
-    MobileOverlay
-  }
-})
 </script>
 
 <template>
   <AppHeader />
-  <main class="main"></main>
-  <RouterView />
+  <main class="main">
+    <RouterView />
+  </main>
   <AppFooter />
   <MobileOverlay />
 </template>
 
 <style lang="scss">
 .main {
-  min-height: 100%;
+  @include flex-center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 </style>

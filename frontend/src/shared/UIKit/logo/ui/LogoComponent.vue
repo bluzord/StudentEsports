@@ -1,10 +1,4 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'LogoComponent'
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <router-link to="/" class="logo">

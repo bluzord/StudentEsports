@@ -1,12 +1,5 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { ButtonComponent } from '@/shared/UIKit/button'
-
-export default defineComponent({
-  components: {
-    ButtonComponent
-  }
-})
 </script>
 
 <template>
@@ -36,14 +29,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .hero {
-  padding: 50px 50px 0 50px;
+  padding: 30px 30px 0 30px;
 
   &__title {
     @include fluid-text(60, 30);
     text-align: center;
-    background-image: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     font-weight: bold;
   }
 

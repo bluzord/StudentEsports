@@ -1,13 +1,5 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { LogoComponent } from '@/shared/UIKit/logo'
-
-export default defineComponent({
-  name: 'AppFooter',
-  components: {
-    LogoComponent
-  }
-})
 </script>
 
 <template>

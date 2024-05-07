@@ -1,15 +1,6 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { LogoComponent } from '@/shared/UIKit/logo'
 import { ButtonComponent } from '@/shared/UIKit/button'
-
-export default defineComponent({
-  name: 'AppHeader',
-  components: {
-    LogoComponent,
-    ButtonComponent
-  }
-})
 </script>
 
 <template>

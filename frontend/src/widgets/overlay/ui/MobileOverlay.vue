@@ -1,15 +1,8 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'MobileOverlay',
-  methods: {
-    closeDialog() {
-      let mobileOverlay = document.getElementById('mobileOverlay') as HTMLDialogElement
-      if (mobileOverlay) mobileOverlay.close()
-    }
-  }
-})
+<script setup lang="ts">
+const closeDialog = function () {
+  let mobileOverlay = document.getElementById('mobileOverlay') as HTMLDialogElement
+  if (mobileOverlay) mobileOverlay.close()
+}
 </script>
 
 <template>
