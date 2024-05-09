@@ -2,6 +2,7 @@ import { ApplicationPage } from '@/pages/application'
 import { HomePage } from '@/pages/home'
 import { NewsPage } from '@/pages/news'
 import { TeamsPage } from '@/pages/teams'
+import { PlayersPage } from '@/pages/players'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/teams',
     component: TeamsPage
+  },
+  {
+    path: '/players',
+    component: PlayersPage
   }
 ]
 

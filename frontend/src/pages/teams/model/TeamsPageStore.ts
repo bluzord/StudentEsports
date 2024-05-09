@@ -50,9 +50,9 @@ export const useTeamsPageStore = defineStore('teamsPageStore', () => {
       id: 6,
       name: 'team',
       game: 'VLR',
-      captainIndex: 3,
+      captainIndex: 0,
       players: ['s1mple', 'player2', 'player3', 'player4', 'player5'],
-      logo: 'SE.svg'
+      logo: 'navi.svg'
     },
     {
       id: 7,

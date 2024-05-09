@@ -8,6 +8,7 @@ const teamsPageStore = useTeamsPageStore()
 
 <template>
   <section class="teams">
+    <h1 class="teams__title">Составы</h1>
     <nav class="teams__filters">
       <FilterComponent
         class="teams__filter"
@@ -83,6 +84,11 @@ const teamsPageStore = useTeamsPageStore()
   gap: 30px;
   padding: 50px;
 
+  &__title {
+    @include fluid-text(60, 30);
+    text-align: center;
+  }
+
   &__filters {
     display: flex;
     gap: 10px;
@@ -92,10 +98,6 @@ const teamsPageStore = useTeamsPageStore()
 
   &__filter {
     width: 120px;
-
-    &--cs {
-      border: 2px solid blue;
-    }
   }
 }
 </style>
