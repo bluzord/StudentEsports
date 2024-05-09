@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { TeamsList } from '@/widgets/teams-list'
 import { FilterComponent } from '@/shared/UIKit/filter'
+import { LoaderComponent } from '@/shared/UIKit/loader'
+
 import { useTeamsPageStore } from '../model/TeamsPageStore'
+import { onMounted } from 'vue'
 
 const teamsPageStore = useTeamsPageStore()
+
+onMounted(() => {
+  teamsPageStore.getTeams()
+})
 </script>
 
 <template>
@@ -68,7 +75,8 @@ const teamsPageStore = useTeamsPageStore()
       </FilterComponent>
     </nav>
 
-    <TeamsList :teamsList="teamsPageStore.filteredTeams" />
+    <TeamsList :teamsList="teamsPageStore.filteredTeams" v-if="!teamsPageStore.isLoading" />
+    <LoaderComponent v-else />
   </section>
 </template>
 

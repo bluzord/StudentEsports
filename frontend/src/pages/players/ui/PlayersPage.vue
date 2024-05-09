@@ -2,8 +2,14 @@
 import { InputComponent } from '@/shared/UIKit/input'
 import { usePlayersPageStore } from '../model/PlayersPageStore'
 import { PlayersList } from '@/widgets/players-list'
+import { LoaderComponent } from '@/shared/UIKit/loader'
+import { onMounted } from 'vue'
 
 const playersPageStore = usePlayersPageStore()
+
+onMounted(() => {
+  playersPageStore.getPlayers()
+})
 </script>
 
 <template>
@@ -18,11 +24,17 @@ const playersPageStore = usePlayersPageStore()
       @input="playersPageStore.search = $event.target.value"
     />
     <PlayersList
-      v-if="playersPageStore.filteredPlayers.length > 0"
+      v-if="playersPageStore.filteredPlayers.length > 0 && !playersPageStore.isLoading"
       :players="playersPageStore.filteredPlayers"
       class="players__list"
     />
-    <div class="players__not-found" v-else>Ничего не найдено</div>
+    <div
+      class="players__not-found"
+      v-if="playersPageStore.filteredPlayers.length < 0 && !playersPageStore.isLoading"
+    >
+      Ничего не найдено
+    </div>
+    <LoaderComponent v-if="playersPageStore.isLoading" />
   </section>
 </template>
 

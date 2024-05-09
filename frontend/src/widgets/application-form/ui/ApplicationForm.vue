@@ -2,7 +2,7 @@
 import { InputComponent } from '@/shared/UIKit/input'
 import { ButtonComponent } from '@/shared/UIKit/button'
 import { SelectComponent } from '@/shared/UIKit/select'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useApplicationStore } from '../model/ApplicationStore'
 import {
   dotaPositions,
@@ -13,13 +13,19 @@ import {
   SCLeagues
 } from '@/app/stores/GamesInfo'
 
+import { SuccessComponent } from '@/shared/UIKit/success'
+
 const game = ref<string>('')
 
 const applicationStore = useApplicationStore()
 </script>
 
 <template>
-  <form class="application-form" @submit.prevent="applicationStore.postApplication(game)">
+  <form
+    class="application-form"
+    @submit.prevent="applicationStore.postApplication()"
+    v-if="!applicationStore.success"
+  >
     <div class="application-form__input-box">
       <label for="surname">Фамилия:</label>
       <InputComponent
@@ -291,6 +297,7 @@ const applicationStore = useApplicationStore()
       <template v-slot:button-text> Отправить </template>
     </ButtonComponent>
   </form>
+  <SuccessComponent v-else />
 </template>
 
 <style lang="scss" scoped>

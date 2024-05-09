@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { type Option } from '@/shared/UIKit/select'
+import axios from 'axios'
 
 export const useApplicationStore = defineStore('applicationStore', () => {
   const patronymic = ref<string>('')
@@ -58,15 +59,35 @@ export const useApplicationStore = defineStore('applicationStore', () => {
     }
   ])
 
-  const getGames = async () => {
-    //TODO
-  }
+  const success = ref<boolean>(false)
 
-  function postApplication(game: string) {}
+  const postApplication = async () => {
+    const response = await axios.post('http://localhost:8080/api/application/create', {
+      name: name.value,
+      surname: surname.value,
+      patronymic: patronymic.value,
+      vk: vk.value,
+      nickname: nickname.value,
+      steamURL: steamURL.value,
+      faceitELO: faceitELO.value,
+      faceitURL: faceitURL.value,
+      dotaMMR: dotaMMR.value,
+      dotaPos: dotaPos.value,
+      dotaBuff: dotaBuff.value,
+      riotID: riotID.value,
+      vlrRole: vlrRole.value,
+      vlrRank: vlrRank.value,
+      lolPos: lolPos.value,
+      lolRank: lolRank.value,
+      tekkenRank: tekkenRank.value,
+      SCLeague: SCLeague.value,
+      SCAPM: SCAPM.value
+    })
+    if (response.status === 201) success.value = true
+  }
 
   return {
     games,
-    getGames,
     postApplication,
     patronymic,
     name,
@@ -86,6 +107,7 @@ export const useApplicationStore = defineStore('applicationStore', () => {
     lolRank,
     tekkenRank,
     SCLeague,
-    SCAPM
+    SCAPM,
+    success
   }
 })

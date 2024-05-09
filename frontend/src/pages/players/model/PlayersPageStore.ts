@@ -1,38 +1,12 @@
 import { type PlayerCardType } from '@/entities/player-card'
+import axios from 'axios'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 export const usePlayersPageStore = defineStore('playersPageStore', () => {
-  const players = ref<PlayerCardType[]>([
-    {
-      id: 1,
-      name: 'Данил',
-      surname: 'Проскурин',
-      nickname: 'bluzord',
-      game: 'CS2',
-      team: 'TEAM',
-      avatar: 'SE.svg'
-    },
-    {
-      id: 2,
-      name: 'Андрей',
-      surname: 'Курлыкин',
-      nickname: 'blumberg',
-      game: 'CS2',
-      team: 'TEAM',
-      avatar: 'SE.svg'
-    },
-    {
-      id: 3,
-      name: 'Александр',
-      surname: 'Костылев',
-      nickname: 's1mple',
-      game: 'CS2',
-      team: 'TEAM',
-      avatar: 'SE.svg'
-    }
-  ])
+  const players = ref<PlayerCardType[]>([])
   const search = ref<string>('')
+  const isLoading = ref<boolean>(false)
 
   const filteredPlayers = computed<PlayerCardType[]>(() => {
     if (search.value !== '') {
@@ -46,5 +20,12 @@ export const usePlayersPageStore = defineStore('playersPageStore', () => {
     return players.value
   })
 
-  return { players, search, filteredPlayers }
+  const getPlayers = async () => {
+    isLoading.value = true
+    const response = await axios.get('http://localhost:8080/api/players')
+    players.value = response.data
+    isLoading.value = false
+  }
+
+  return { players, search, filteredPlayers, isLoading, getPlayers }
 })
