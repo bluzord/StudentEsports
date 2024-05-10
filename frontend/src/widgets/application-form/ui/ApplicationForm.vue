@@ -2,7 +2,7 @@
 import { InputComponent } from '@/shared/UIKit/input'
 import { ButtonComponent } from '@/shared/UIKit/button'
 import { SelectComponent } from '@/shared/UIKit/select'
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useApplicationStore } from '../model/ApplicationStore'
 import {
   dotaPositions,

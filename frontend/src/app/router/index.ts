@@ -4,6 +4,7 @@ import { NewsPage } from '@/pages/news'
 import { TeamsPage } from '@/pages/teams'
 import { PlayersPage } from '@/pages/players'
 import { createRouter, createWebHistory } from 'vue-router'
+import { NewsElementPage } from '@/pages/news-element'
 
 const routes = [
   {
@@ -13,6 +14,10 @@ const routes = [
   {
     path: '/news',
     component: NewsPage
+  },
+  {
+    path: '/news/:id',
+    component: NewsElementPage
   },
   {
     path: '/application',
