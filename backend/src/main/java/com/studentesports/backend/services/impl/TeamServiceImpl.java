@@ -2,6 +2,7 @@ package com.studentesports.backend.services.impl;
 
 import com.studentesports.backend.DTO.PlayerDTO;
 import com.studentesports.backend.DTO.TeamDTO;
+import com.studentesports.backend.exceptions.TeamsNotFoundException;
 import com.studentesports.backend.models.Player;
 import com.studentesports.backend.models.Team;
 import com.studentesports.backend.respositories.PlayerRepository;
@@ -28,6 +29,7 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List<TeamDTO> getTeams() {
         List<Team> teams = teamRepository.findAll();
+        if (teams.isEmpty()) throw new TeamsNotFoundException("Команды не найдены");
         return teams.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 

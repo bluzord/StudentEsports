@@ -10,19 +10,25 @@ export const useNewsPageStore = defineStore('newsPageStore', () => {
   const totalNews = ref<number>()
   const totalPages = ref<number>()
   const isLoading = ref<boolean>(false)
+  const isSuccess = ref<boolean>(true)
 
   const getNews = async () => {
     isLoading.value = true
-    const response = await axios.get('http://localhost:8080/api/news', {
-      params: {
-        pageNumber: page.value,
-        pageSize: limit.value
-      }
-    })
-    news.value = response.data.content
-    totalNews.value = response.data.totalNews
-    totalPages.value = response.data.totalPages
-    isLoading.value = false
+    try {
+      const response = await axios.get('http://localhost:8080/api/news', {
+        params: {
+          pageNumber: page.value,
+          pageSize: limit.value
+        }
+      })
+      news.value = response.data.content
+      totalNews.value = response.data.totalNews
+      totalPages.value = response.data.totalPages
+    } catch (err) {
+      isSuccess.value = false
+    } finally {
+      isLoading.value = false
+    }
   }
 
   const loadMoreNews = async () => {
@@ -44,6 +50,7 @@ export const useNewsPageStore = defineStore('newsPageStore', () => {
     totalNews,
     totalPages,
     isLoading,
-    loadMoreNews
+    loadMoreNews,
+    isSuccess
   }
 })

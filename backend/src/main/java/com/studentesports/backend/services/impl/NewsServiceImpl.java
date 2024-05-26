@@ -4,6 +4,8 @@ import com.studentesports.backend.DTO.NewsCardDTO;
 import com.studentesports.backend.DTO.NewsCardResponse;
 import com.studentesports.backend.DTO.NewsElement;
 import com.studentesports.backend.DTO.PlayerDTO;
+import com.studentesports.backend.exceptions.NewsElementNotFoundException;
+import com.studentesports.backend.exceptions.NewsNotFoundException;
 import com.studentesports.backend.models.News;
 import com.studentesports.backend.models.Player;
 import com.studentesports.backend.respositories.NewsRepository;
@@ -37,6 +39,8 @@ public class NewsServiceImpl implements NewsService {
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("date").descending());
         Page<News> news = newsRepository.findAll(pageable);
         List<News> listOfNews = news.getContent();
+        if (listOfNews.isEmpty()) throw new NewsNotFoundException("Новости не найдены");
+
 
         List<NewsCardDTO> content = listOfNews.stream().map(this::mapToDTO).collect(Collectors.toList());
         NewsCardResponse newsCardResponse = new NewsCardResponse();
@@ -51,7 +55,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public NewsElement getNewsElement(int id) {
-        News news = newsRepository.findById(id).orElseThrow();
+        News news = newsRepository.findById(id).orElseThrow(() -> new NewsElementNotFoundException("Новость не найдена"));
         NewsElement newsElement = new NewsElement();
         newsElement.setId(news.getId());
         newsElement.setTitle(news.getTitle());

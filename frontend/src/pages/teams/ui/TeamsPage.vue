@@ -75,8 +75,20 @@ onMounted(() => {
       </FilterComponent>
     </nav>
 
-    <TeamsList :teamsList="teamsPageStore.filteredTeams" v-if="!teamsPageStore.isLoading" />
-    <LoaderComponent v-else />
+    <TeamsList
+      :teamsList="teamsPageStore.filteredTeams"
+      v-if="!teamsPageStore.isLoading && teamsPageStore.isSuccess"
+    />
+    <LoaderComponent v-if="teamsPageStore.isLoading" />
+    <div
+      v-if="
+        (teamsPageStore.filteredTeams.length < 0 || !teamsPageStore.isSuccess) &&
+        !teamsPageStore.isLoading
+      "
+      class="teams__not-found"
+    >
+      Ничего не найдено
+    </div>
   </section>
 </template>
 
@@ -106,6 +118,11 @@ onMounted(() => {
 
   &__filter {
     width: 120px;
+  }
+
+  &__not-found {
+    @include fluid-text(22, 20);
+    font-weight: bold;
   }
 }
 </style>

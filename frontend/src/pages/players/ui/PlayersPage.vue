@@ -24,13 +24,20 @@ onMounted(() => {
       @input="playersPageStore.search = $event.target.value"
     />
     <PlayersList
-      v-if="playersPageStore.filteredPlayers.length > 0 && !playersPageStore.isLoading"
+      v-if="
+        playersPageStore.filteredPlayers.length > 0 &&
+        !playersPageStore.isLoading &&
+        playersPageStore.isSuccess
+      "
       :players="playersPageStore.filteredPlayers"
       class="players__list"
     />
     <div
       class="players__not-found"
-      v-if="playersPageStore.filteredPlayers.length < 0 && !playersPageStore.isLoading"
+      v-if="
+        (playersPageStore.filteredPlayers.length < 0 || !playersPageStore.isSuccess) &&
+        !playersPageStore.isLoading
+      "
     >
       Ничего не найдено
     </div>

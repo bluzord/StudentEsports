@@ -19,6 +19,7 @@ public class Application {
     private String patronymic;
     private String vk;
     private String nickname;
+    private String game;
 
     @Column(name = "steam_url")
     private String steamURL;

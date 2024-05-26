@@ -5,6 +5,7 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const isSuccess = ref<boolean>(true)
 const newsEl = ref<NewsElementType>({
   id: 0,
   title: '',
@@ -14,8 +15,12 @@ const newsEl = ref<NewsElementType>({
 })
 
 const getPost = async () => {
-  const response = await axios.get(`http://localhost:8080/api/news/${route.params.id}`)
-  newsEl.value = response.data
+  try {
+    const response = await axios.get(`http://localhost:8080/api/news/${route.params.id}`)
+    newsEl.value = response.data
+  } catch (err) {
+    isSuccess.value = false
+  }
 }
 
 onMounted(() => {
@@ -25,12 +30,18 @@ onMounted(() => {
 
 <template>
   <section class="news-element-id">
-    <NewsElement :newsElement="newsEl" />
+    <NewsElement v-if="isSuccess" :newsElement="newsEl" />
+    <div v-else class="news-element-id__not-found">Новость не найдена</div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 .news-element-id {
   padding: 50px;
+  height: 700px;
+
+  &__not-found {
+    @include fluid-text(60, 40);
+  }
 }
 </style>

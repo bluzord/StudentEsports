@@ -1,6 +1,7 @@
 package com.studentesports.backend.services.impl;
 
 import com.studentesports.backend.DTO.PlayerDTO;
+import com.studentesports.backend.exceptions.PlayersNotFoundException;
 import com.studentesports.backend.models.Player;
 import com.studentesports.backend.respositories.PlayerRepository;
 import com.studentesports.backend.services.PlayerService;
@@ -23,6 +24,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<PlayerDTO> getPlayers() {
         List<Player> players = playerRepository.findAll();
+        if (players.isEmpty()) throw new PlayersNotFoundException("Игроки не найдены");
         return players.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 

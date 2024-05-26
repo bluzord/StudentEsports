@@ -7,12 +7,18 @@ export const useTeamsPageStore = defineStore('teamsPageStore', () => {
   const game = ref<'ALL' | 'CS2' | 'DOTA' | 'VLR' | 'LOL' | 'SC2' | 'TEKKEN'>('ALL')
   const teams = ref<TeamCardType[]>([])
   const isLoading = ref<boolean>(false)
+  const isSuccess = ref<boolean>(true)
 
   const getTeams = async () => {
     isLoading.value = true
-    const response = await axios.get('http://localhost:8080/api/teams')
-    teams.value = response.data
-    isLoading.value = false
+    try {
+      const response = await axios.get('http://localhost:8080/api/teams')
+      teams.value = response.data
+    } catch (err) {
+      isSuccess.value = false
+    } finally {
+      isLoading.value = false
+    }
   }
 
   const filteredTeams = computed<TeamCardType[]>(() => {
@@ -25,6 +31,7 @@ export const useTeamsPageStore = defineStore('teamsPageStore', () => {
     teams,
     getTeams,
     filteredTeams,
-    isLoading
+    isLoading,
+    isSuccess
   }
 })

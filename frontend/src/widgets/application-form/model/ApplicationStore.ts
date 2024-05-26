@@ -61,13 +61,14 @@ export const useApplicationStore = defineStore('applicationStore', () => {
 
   const success = ref<boolean>(false)
 
-  const postApplication = async () => {
+  const postApplication = async (game: string) => {
     const response = await axios.post('http://localhost:8080/api/application/create', {
       name: name.value,
       surname: surname.value,
       patronymic: patronymic.value,
       vk: vk.value,
       nickname: nickname.value,
+      game: game,
       steamURL: steamURL.value,
       faceitELO: faceitELO.value,
       faceitURL: faceitURL.value,

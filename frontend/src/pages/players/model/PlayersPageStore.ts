@@ -7,6 +7,7 @@ export const usePlayersPageStore = defineStore('playersPageStore', () => {
   const players = ref<PlayerCardType[]>([])
   const search = ref<string>('')
   const isLoading = ref<boolean>(false)
+  const isSuccess = ref<boolean>(true)
 
   const filteredPlayers = computed<PlayerCardType[]>(() => {
     if (search.value !== '') {
@@ -22,10 +23,15 @@ export const usePlayersPageStore = defineStore('playersPageStore', () => {
 
   const getPlayers = async () => {
     isLoading.value = true
-    const response = await axios.get('http://localhost:8080/api/players')
-    players.value = response.data
-    isLoading.value = false
+    try {
+      const response = await axios.get('http://localhost:8080/api/players')
+      players.value = response.data
+    } catch (err) {
+      isSuccess.value = false
+    } finally {
+      isLoading.value = false
+    }
   }
 
-  return { players, search, filteredPlayers, isLoading, getPlayers }
+  return { players, search, filteredPlayers, isLoading, getPlayers, isSuccess }
 })

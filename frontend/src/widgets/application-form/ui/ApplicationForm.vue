@@ -23,7 +23,7 @@ const applicationStore = useApplicationStore()
 <template>
   <form
     class="application-form"
-    @submit.prevent="applicationStore.postApplication()"
+    @submit.prevent="applicationStore.postApplication(game)"
     v-if="!applicationStore.success"
   >
     <div class="application-form__input-box">

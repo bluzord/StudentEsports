@@ -35,11 +35,14 @@ onUnmounted(() => {
     <h1 class="news__title">Новости</h1>
     <NewsList
       class="news__list"
-      v-if="!newsPageStore.isLoading"
+      v-if="!newsPageStore.isLoading && newsPageStore.isSuccess"
       :newsList="newsPageStore.news"
       ref="scrollComponent"
     />
-    <LoaderComponent v-else />
+    <LoaderComponent v-if="newsPageStore.isLoading" />
+    <div v-if="!newsPageStore.isLoading && !newsPageStore.isSuccess" class="news__not-found">
+      Новости не найдены
+    </div>
     <div ref="obs" class="observer"></div>
   </section>
 </template>
@@ -48,8 +51,15 @@ onUnmounted(() => {
 .news {
   @include flex-center;
   flex-direction: column;
+  justify-content: start;
   gap: 30px;
   padding: 50px;
+  min-height: 700px;
+
+  &__not-found {
+    @include fluid-text(22, 20);
+    font-weight: bold;
+  }
 
   &__title {
     @include fluid-text(60, 30);

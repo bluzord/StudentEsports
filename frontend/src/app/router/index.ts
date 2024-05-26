@@ -5,6 +5,7 @@ import { TeamsPage } from '@/pages/teams'
 import { PlayersPage } from '@/pages/players'
 import { createRouter, createWebHistory } from 'vue-router'
 import { NewsElementPage } from '@/pages/news-element'
+import { NotFoundPage } from '@/pages/not-found'
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
   {
     path: '/players',
     component: PlayersPage
+  },
+  {
+    path: '/:pathName(.*)',
+    component: NotFoundPage
   }
 ]
 
