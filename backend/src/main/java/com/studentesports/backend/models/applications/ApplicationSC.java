@@ -4,22 +4,26 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "applications_sc")
 public class ApplicationSC extends Application{
     @Column(name = "sc_league")
-    private String SCLeague;
+    private String scLeague;
 
     @Column(name = "sc_apm")
-    private Integer SCAPM;
+    private Integer scAPM;
 
-    public ApplicationSC( String name, String surname, String patronymic, String vk, String nickname, String game, String SCLeague, Integer SCAPM) {
+    public ApplicationSC( String name, String surname, String patronymic, String vk, String nickname, String game, String scLeague, Integer scAPM) {
         super(name, surname, patronymic, vk, nickname, game);
-        this.SCLeague = SCLeague;
-        this.SCAPM = SCAPM;
+        this.scLeague = scLeague;
+        this.scAPM = scAPM;
     }
 }

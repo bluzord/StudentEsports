@@ -89,8 +89,8 @@ public class ApplicationController {
                         application.getVk(),
                         application.getNickname(),
                         application.getGame(),
-                        application.getSCLeague(),
-                        application.getSCAPM()
+                        application.getScLeague(),
+                        application.getScAPM()
                 );
                 this.applicationService.createApplicationSC(newSCApplication);
             }

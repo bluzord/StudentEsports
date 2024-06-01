@@ -22,6 +22,6 @@ public class ApplicationDTO {
     private String lolPos;
     private String lolRank;
     private String tekkenRank;
-    private String SCLeague;
-    private Integer SCAPM;
+    private String scLeague;
+    private Integer scAPM;
 }

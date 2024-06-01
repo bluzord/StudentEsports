@@ -29,8 +29,8 @@ export const useApplicationStore = defineStore('applicationStore', () => {
 
   const tekkenRank = ref<string>('')
 
-  const SCLeague = ref<string>('')
-  const SCAPM = ref<number>()
+  const scLeague = ref<string>('')
+  const scAPM = ref<number>()
 
   const games = ref<Option[]>([
     {
@@ -81,8 +81,8 @@ export const useApplicationStore = defineStore('applicationStore', () => {
       lolPos: lolPos.value,
       lolRank: lolRank.value,
       tekkenRank: tekkenRank.value,
-      SCLeague: SCLeague.value,
-      SCAPM: SCAPM.value
+      scLeague: scLeague.value,
+      scAPM: scAPM.value
     })
     if (response.status === 201) success.value = true
   }
@@ -107,8 +107,8 @@ export const useApplicationStore = defineStore('applicationStore', () => {
     lolPos,
     lolRank,
     tekkenRank,
-    SCLeague,
-    SCAPM,
+    scLeague,
+    scAPM,
     success
   }
 })

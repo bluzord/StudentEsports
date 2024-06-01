@@ -271,8 +271,8 @@ const applicationStore = useApplicationStore()
       <SelectComponent
         id="sc-league"
         :options="SCLeagues"
-        :value="applicationStore.SCLeague"
-        @change="applicationStore.SCLeague = $event.target.value"
+        :value="applicationStore.scLeague"
+        @change="applicationStore.scLeague = $event.target.value"
         required
         class="application-form__select"
       >
@@ -288,8 +288,8 @@ const applicationStore = useApplicationStore()
         required
         placeholder="100"
         class="application-form__input"
-        :value="applicationStore.SCAPM"
-        @input="applicationStore.SCAPM = $event.target.value"
+        :value="applicationStore.scAPM"
+        @input="applicationStore.scAPM = $event.target.value"
       />
     </div>
 

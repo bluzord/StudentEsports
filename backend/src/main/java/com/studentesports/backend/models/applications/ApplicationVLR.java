@@ -4,8 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -20,7 +24,7 @@ public class ApplicationVLR extends Application{
     @Column(name = "vlr_rank")
     private String vlrRank;
 
-    public ApplicationVLR( String name, String surname, String patronymic, String vk, String nickname, String game, String riotID, String vlrRole, String vlrRank) {
+    public ApplicationVLR(String name, String surname, String patronymic, String vk, String nickname, String game, String riotID, String vlrRole, String vlrRank) {
         super(name, surname, patronymic, vk, nickname, game);
         this.riotID = riotID;
         this.vlrRole = vlrRole;

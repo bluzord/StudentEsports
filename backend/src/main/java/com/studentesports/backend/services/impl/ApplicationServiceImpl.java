@@ -1,11 +1,14 @@
 package com.studentesports.backend.services.impl;
 
+import com.studentesports.backend.exceptions.ApplicationsNotFoundException;
 import com.studentesports.backend.models.applications.*;
 import com.studentesports.backend.respositories.ApplicationRepository;
 import com.studentesports.backend.respositories.applications.*;
 import com.studentesports.backend.services.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
@@ -59,4 +62,47 @@ public class ApplicationServiceImpl implements ApplicationService {
     public void createApplicationSC(ApplicationSC application) {
         this.applicationSCRepository.save(application);
     }
+
+    @Override
+    public List<ApplicationCS2> getApplicationsCS2() {
+        List<ApplicationCS2> applications = applicationCS2Repository.findAll();
+        if (applications.isEmpty()) throw new ApplicationsNotFoundException("Заявки не найдены");
+        return applications;
+    }
+
+    @Override
+    public List<ApplicationDOTA> getApplicationsDOTA() {
+        List<ApplicationDOTA> applications = applicationDOTARepository.findAll();
+        if (applications.isEmpty()) throw new ApplicationsNotFoundException("Заявки не найдены");
+        return applications;
+    }
+
+    @Override
+    public List<ApplicationLOL> getApplicationsLOL() {
+        List<ApplicationLOL> applications = applicationLOLRepository.findAll();
+        if (applications.isEmpty()) throw new ApplicationsNotFoundException("Заявки не найдены");
+        return applications;
+    }
+
+    @Override
+    public List<ApplicationVLR> getApplicationsVLR() {
+        List<ApplicationVLR> applications = applicationVLRRepository.findAll();
+        if (applications.isEmpty()) throw new ApplicationsNotFoundException("Заявки не найдены");
+        return applications;
+    }
+
+    @Override
+    public List<ApplicationTEKKEN> getApplicationsTEKKEN() {
+        List<ApplicationTEKKEN> applications = applicationTEKKENRepository.findAll();
+        if (applications.isEmpty()) throw new ApplicationsNotFoundException("Заявки не найдены");
+        return applications;
+    }
+
+    @Override
+    public List<ApplicationSC> getApplicationsSC() {
+        List<ApplicationSC> applications = applicationSCRepository.findAll();
+        if (applications.isEmpty()) throw new ApplicationsNotFoundException("Заявки не найдены");
+        return applications;
+    }
+
 }
