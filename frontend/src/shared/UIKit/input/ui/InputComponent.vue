@@ -22,5 +22,23 @@
   &:focus {
     border-bottom: 2px solid var(--color-accent-alt);
   }
+
+  &--invalid {
+    color: #ff6e6e;
+    border-bottom: 2px solid #ff6e6e;
+
+    @include hover {
+      cursor: pointer;
+      border-bottom: 2px solid #ff6e6e;
+    }
+
+    &:focus {
+      border-bottom: 2px solid #ff6e6e;
+    }
+
+    ::placeholder {
+      color: #ff6e6e;
+    }
+  }
 }
 </style>

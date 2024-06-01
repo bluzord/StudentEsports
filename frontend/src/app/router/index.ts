@@ -6,6 +6,7 @@ import { PlayersPage } from '@/pages/players'
 import { createRouter, createWebHistory } from 'vue-router'
 import { NewsElementPage } from '@/pages/news-element'
 import { NotFoundPage } from '@/pages/not-found'
+import { AdminApplicationsPage } from '@/pages/admin-applications'
 
 const routes = [
   {
@@ -35,6 +36,10 @@ const routes = [
   {
     path: '/:pathName(.*)',
     component: NotFoundPage
+  },
+  {
+    path: '/admin',
+    component: AdminApplicationsPage
   }
 ]
 
