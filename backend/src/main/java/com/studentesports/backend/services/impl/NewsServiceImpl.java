@@ -6,8 +6,10 @@ import com.studentesports.backend.DTO.NewsElement;
 import com.studentesports.backend.DTO.PlayerDTO;
 import com.studentesports.backend.exceptions.NewsElementNotFoundException;
 import com.studentesports.backend.exceptions.NewsNotFoundException;
+import com.studentesports.backend.exceptions.TeamsNotFoundException;
 import com.studentesports.backend.models.News;
 import com.studentesports.backend.models.Player;
+import com.studentesports.backend.models.Team;
 import com.studentesports.backend.respositories.NewsRepository;
 import com.studentesports.backend.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -54,12 +59,19 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    public List<NewsCardDTO> getAdminNews() {
+        List<News> news = newsRepository.findAll();
+        if (news.isEmpty()) throw new NewsNotFoundException("Новости не найдены");
+        return news.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public NewsElement getNewsElement(int id) {
         News news = newsRepository.findById(id).orElseThrow(() -> new NewsElementNotFoundException("Новость не найдена"));
         NewsElement newsElement = new NewsElement();
         newsElement.setId(news.getId());
         newsElement.setTitle(news.getTitle());
-        newsElement.setContent(List.of(news.getContent().split("\n\n")));
+        newsElement.setContent(news.getContent());
         newsElement.setImage(news.getImage());
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -67,6 +79,23 @@ public class NewsServiceImpl implements NewsService {
         newsElement.setDate(dateStr);
 
         return newsElement;
+    }
+
+    @Override
+    public News createNews(MultipartFile image, String title, String content) throws IOException {
+        String filePath = "C:/Users/bluzord/Documents/StudentEsports/frontend/src/app/images/news/" + image.getOriginalFilename();
+        News news = new News(new Date(), title, content, image.getOriginalFilename());
+        System.out.println(filePath);
+        image.transferTo(new File(filePath));
+        newsRepository.save(news);
+        return news;
+    }
+
+    @Override
+    public void deleteNewsById(int id) {
+        News news = newsRepository.findById(id).orElseThrow(() -> new NewsElementNotFoundException("Новость не найдена"));
+        System.out.println(news);
+        newsRepository.delete(news);
     }
 
 

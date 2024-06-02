@@ -7,6 +7,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { NewsElementPage } from '@/pages/news-element'
 import { NotFoundPage } from '@/pages/not-found'
 import { AdminApplicationsPage } from '@/pages/admin-applications'
+import { AdminNewsPage } from '@/pages/admin-news'
+import { AdminNewsCreatePage } from '@/pages/admin-news-create'
 
 const routes = [
   {
@@ -40,6 +42,14 @@ const routes = [
   {
     path: '/admin',
     component: AdminApplicationsPage
+  },
+  {
+    path: '/admin/news',
+    component: AdminNewsPage
+  },
+  {
+    path: '/admin/news/create',
+    component: AdminNewsCreatePage
   }
 ]
 

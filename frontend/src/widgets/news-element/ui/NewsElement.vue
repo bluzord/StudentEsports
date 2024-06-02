@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type NewsElementType } from '../model/NewsElementType'
+import VueMarkdown from 'vue-markdown-render'
 
 defineProps<{
   newsElement: NewsElementType
@@ -17,15 +18,7 @@ defineProps<{
       :alt="newsElement.title"
       class="news-element__image"
     />
-    <div class="news-element__content">
-      <p
-        class="news-element__paragraph"
-        v-for="(paragraph, index) in newsElement.content"
-        :key="index"
-      >
-        {{ paragraph }}
-      </p>
-    </div>
+    <vue-markdown :source="newsElement.content" class="news-element__content" />
   </article>
 </template>
 
@@ -42,7 +35,8 @@ defineProps<{
   }
 
   &__image {
-    width: 50%;
+    max-width: 600px;
+    max-height: 400px;
 
     @include tablet {
       width: 100%;
@@ -53,7 +47,8 @@ defineProps<{
     @include fluid-text(22, 18);
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
+    width: 100%;
   }
 }
 </style>

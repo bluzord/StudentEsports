@@ -480,22 +480,26 @@ onMounted(() => {
   table-layout: fixed;
   width: 100%;
   margin-bottom: 20px;
-}
-.table th {
-  font-weight: bold;
-  padding: 5px;
-  background: #525252;
-  border: 1px solid #525252;
-}
-.table td {
-  padding: 5px 10px;
-  border: 1px solid #525252;
-  text-align: left;
-}
-.table tbody tr:nth-child(odd) {
-  background: #525252;
-}
-.table tbody tr:nth-child(even) {
-  background: #525252;
+
+  th {
+    font-weight: bold;
+    padding: 5px;
+    background: #525252;
+    border: 1px solid #525252;
+  }
+
+  td {
+    padding: 5px 10px;
+    border: 1px solid #525252;
+    text-align: left;
+  }
+
+  tbody tr:nth-child(odd) {
+    background: #525252;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #525252;
+  }
 }
 </style>

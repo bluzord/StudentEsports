@@ -10,6 +10,11 @@
         <router-link to="/admin/news" class="admin-menu__link">Новости</router-link>
       </li>
       <li class="admin-menu__item">
+        <router-link to="/admin/news/create" class="admin-menu__link"
+          >Публикация новостей</router-link
+        >
+      </li>
+      <li class="admin-menu__item">
         <router-link to="/admin/teams" class="admin-menu__link">Составы</router-link>
       </li>
       <li class="admin-menu__item">

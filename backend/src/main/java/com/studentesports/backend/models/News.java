@@ -23,4 +23,11 @@ public class News {
     private String title;
     private String content;
     private String image;
+
+    public News(Date date, String title, String content, String image) {
+        this.date = date;
+        this.title = title;
+        this.content = content;
+        this.image = image;
+    }
 }

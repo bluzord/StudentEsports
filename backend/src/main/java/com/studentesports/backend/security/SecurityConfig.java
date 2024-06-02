@@ -2,6 +2,7 @@ package com.studentesports.backend.security;
 
 import com.studentesports.backend.filters.JwtAuthenticationFilter;
 import com.studentesports.backend.services.impl.UserDetailsServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,14 @@ public class SecurityConfig {
         this.authenticationFilter = authenticationFilter;
     }
 
+    private static CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOriginPattern("*");
+        corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);
+        corsConfiguration.applyPermitDefaultValues();
+        return corsConfiguration;
+    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -50,8 +59,7 @@ public class SecurityConfig {
        return http
                .csrf(AbstractHttpConfigurer::disable)
                .cors(httpSecurityCorsConfigurer ->
-                       httpSecurityCorsConfigurer.configurationSource(request ->
-                               new CorsConfiguration().applyPermitDefaultValues()))
+                       httpSecurityCorsConfigurer.configurationSource(SecurityConfig::getCorsConfiguration))
                .exceptionHandling(exceptions -> exceptions
                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                .sessionManagement(session -> session
@@ -63,6 +71,7 @@ public class SecurityConfig {
                )
                .userDetailsService(userDetailsService)
                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
+
                .build();
     }
 }

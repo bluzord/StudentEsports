@@ -47,6 +47,7 @@ defineProps<Props>()
   flex-direction: column;
   gap: 30px;
   padding: 30px;
+  max-width: 860px;
 
   @include tablet {
     padding: 20px;

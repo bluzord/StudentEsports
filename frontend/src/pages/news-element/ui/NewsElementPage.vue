@@ -9,7 +9,7 @@ const isSuccess = ref<boolean>(true)
 const newsEl = ref<NewsElementType>({
   id: 0,
   title: '',
-  content: [],
+  content: '',
   date: '',
   image: ''
 })
@@ -38,7 +38,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .news-element-id {
   padding: 50px;
-  height: 700px;
+  min-height: 700px;
 
   &__not-found {
     @include fluid-text(60, 40);
