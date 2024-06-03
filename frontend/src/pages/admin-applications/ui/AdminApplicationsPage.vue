@@ -10,93 +10,93 @@ const authStore = useAuthStore()
 
 const game = ref<String>('CS2')
 
-const applicationsCS2 = ref<
-  {
-    id: number
-    name: string
-    surname: string
-    patronymic: string
-    vk: string
-    nickname: string
-    game: string
-    steamURL: string
-    faceitELO: number
-    faceitURL: string
-  }[]
->([])
+type applicationCS2Type = {
+  id: number
+  name: string
+  surname: string
+  patronymic: string
+  vk: string
+  nickname: string
+  game: string
+  steamURL: string
+  faceitELO: number
+  faceitURL: string
+}
 
-const applicationsDOTA = ref<
-  {
-    id: number
-    name: string
-    surname: string
-    patronymic: string
-    vk: string
-    nickname: string
-    game: string
-    steamURL: string
-    dotaMMR: number
-    dotaPos: string
-    dotaBuff: string
-  }[]
->([])
+const applicationsCS2 = ref<applicationCS2Type[]>([])
 
-const applicationsLOL = ref<
-  {
-    id: number
-    name: string
-    surname: string
-    patronymic: string
-    vk: string
-    nickname: string
-    game: string
-    riotID: string
-    lolPos: string
-    lolRank: string
-  }[]
->([])
+type applicationDOTAType = {
+  id: number
+  name: string
+  surname: string
+  patronymic: string
+  vk: string
+  nickname: string
+  game: string
+  steamURL: string
+  dotaMMR: number
+  dotaPos: string
+  dotaBuff: string
+}
 
-const applicationsSC = ref<
-  {
-    id: number
-    name: string
-    surname: string
-    patronymic: string
-    vk: string
-    nickname: string
-    game: string
-    scLeague: string
-    scAPM: number
-  }[]
->([])
+const applicationsDOTA = ref<applicationDOTAType[]>([])
 
-const applicationsVLR = ref<
-  {
-    id: number
-    name: string
-    surname: string
-    patronymic: string
-    vk: string
-    nickname: string
-    game: string
-    riotID: string
-    vlrRole: string
-    vlrRank: string
-  }[]
->([])
+type applicationLOLType = {
+  id: number
+  name: string
+  surname: string
+  patronymic: string
+  vk: string
+  nickname: string
+  game: string
+  riotID: string
+  lolPos: string
+  lolRank: string
+}
 
-const applicationsTEKKEN = ref<
-  {
-    id: number
-    name: string
-    surname: string
-    patronymic: string
-    vk: string
-    nickname: string
-    game: string
-    tekkenRank: string
-  }[]
->([])
+const applicationsLOL = ref<applicationLOLType[]>([])
+
+type applicationSCType = {
+  id: number
+  name: string
+  surname: string
+  patronymic: string
+  vk: string
+  nickname: string
+  game: string
+  scLeague: string
+  scAPM: number
+}
+
+const applicationsSC = ref<applicationSCType[]>([])
+
+type applicationVLRType = {
+  id: number
+  name: string
+  surname: string
+  patronymic: string
+  vk: string
+  nickname: string
+  game: string
+  riotID: string
+  vlrRole: string
+  vlrRank: string
+}
+
+const applicationsVLR = ref<applicationVLRType[]>([])
+
+type applicationTekkenType = {
+  id: number
+  name: string
+  surname: string
+  patronymic: string
+  vk: string
+  nickname: string
+  game: string
+  tekkenRank: string
+}
+
+const applicationsTEKKEN = ref<applicationTekkenType[]>([])
 
 const getCS2 = async () => {
   try {
@@ -180,6 +180,100 @@ const getTEKKEN = async () => {
   } catch (err) {
     applicationsTEKKEN.value = []
   }
+}
+
+const createCS2Player = async (application: applicationCS2Type) => {
+  const response = await axios.post(
+    'http://localhost:8080/admin/api/players/cs2/create',
+    application,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }
+  )
+  deleteApplication(application.id)
+}
+
+const createDOTAPlayer = async (application: applicationDOTAType) => {
+  const response = await axios.post(
+    'http://localhost:8080/admin/api/players/dota/create',
+    application,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }
+  )
+  deleteApplication(application.id)
+}
+
+const createLOLPlayer = async (application: applicationLOLType) => {
+  const response = await axios.post(
+    'http://localhost:8080/admin/api/players/lol/create',
+    application,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }
+  )
+  deleteApplication(application.id)
+}
+
+const createSCPlayer = async (application: applicationSCType) => {
+  const response = await axios.post(
+    'http://localhost:8080/admin/api/players/sc/create',
+    application,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }
+  )
+  deleteApplication(application.id)
+}
+
+const createVLRPlayer = async (application: applicationVLRType) => {
+  const response = await axios.post(
+    'http://localhost:8080/admin/api/players/vlr/create',
+    application,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }
+  )
+  deleteApplication(application.id)
+}
+
+const createTEKKENPlayer = async (application: applicationTekkenType) => {
+  const response = await axios.post(
+    'http://localhost:8080/admin/api/players/tekken/create',
+    application,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }
+  )
+  deleteApplication(application.id)
+}
+
+const deleteApplication = async (id: number) => {
+  const response = await axios.delete(`http://localhost:8080/admin/api/applications/${id}/delete`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token')
+    }
+  })
+  window.location.href = '/admin'
 }
 
 onMounted(() => {
@@ -275,8 +369,8 @@ onMounted(() => {
           <td>
             <a :href="application.faceitURL">Ссылка</a>
           </td>
-          <td></td>
-          <td></td>
+          <td><button @click="createCS2Player(application)">Принять</button></td>
+          <td><button @click="deleteApplication(application.id)">Отклонить</button></td>
         </tr>
       </table>
 
@@ -312,8 +406,8 @@ onMounted(() => {
           <td>
             <a :href="application.dotaBuff">Ссылка</a>
           </td>
-          <td></td>
-          <td></td>
+          <td><button @click="createDOTAPlayer(application)">Принять</button></td>
+          <td><button @click="deleteApplication(application.id)">Отклонить</button></td>
         </tr>
       </table>
 
@@ -345,8 +439,8 @@ onMounted(() => {
           </td>
           <td>{{ application.lolPos }}</td>
           <td>{{ application.lolRank }}</td>
-          <td></td>
-          <td></td>
+          <td><button @click="createLOLPlayer(application)">Принять</button></td>
+          <td><button @click="deleteApplication(application.id)">Отклонить</button></td>
         </tr>
       </table>
 
@@ -376,8 +470,8 @@ onMounted(() => {
             {{ application.scLeague }}
           </td>
           <td>{{ application.scAPM }}</td>
-          <td></td>
-          <td></td>
+          <td><button @click="createSCPlayer(application)">Принять</button></td>
+          <td><button @click="deleteApplication(application.id)">Отклонить</button></td>
         </tr>
       </table>
 
@@ -405,8 +499,8 @@ onMounted(() => {
           <td>{{ application.riotID }}</td>
           <td>{{ application.vlrRole }}</td>
           <td>{{ application.vlrRank }}</td>
-          <td></td>
-          <td></td>
+          <td><button @click="createVLRPlayer(application)">Принять</button></td>
+          <td><button @click="deleteApplication(application.id)">Отклонить</button></td>
         </tr>
       </table>
 
@@ -430,8 +524,8 @@ onMounted(() => {
           <td><a :href="application.vk">Ссылка</a></td>
           <td>{{ application.nickname }}</td>
           <td>{{ application.tekkenRank }}</td>
-          <td></td>
-          <td></td>
+          <td><button @click="createTEKKENPlayer(application)">Принять</button></td>
+          <td><button @click="deleteApplication(application.id)">Отклонить</button></td>
         </tr>
       </table>
     </section>

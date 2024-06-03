@@ -1,5 +1,6 @@
 package com.studentesports.backend.models;
 
+import com.studentesports.backend.models.players.Player;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

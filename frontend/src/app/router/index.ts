@@ -9,6 +9,7 @@ import { NotFoundPage } from '@/pages/not-found'
 import { AdminApplicationsPage } from '@/pages/admin-applications'
 import { AdminNewsPage } from '@/pages/admin-news'
 import { AdminNewsCreatePage } from '@/pages/admin-news-create'
+import { AdminPlayersPage } from '@/pages/admin-players'
 
 const routes = [
   {
@@ -50,6 +51,10 @@ const routes = [
   {
     path: '/admin/news/create',
     component: AdminNewsCreatePage
+  },
+  {
+    path: '/admin/players',
+    component: AdminPlayersPage
   }
 ]
 

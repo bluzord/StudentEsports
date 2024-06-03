@@ -3,13 +3,9 @@ package com.studentesports.backend.services.impl;
 import com.studentesports.backend.DTO.NewsCardDTO;
 import com.studentesports.backend.DTO.NewsCardResponse;
 import com.studentesports.backend.DTO.NewsElement;
-import com.studentesports.backend.DTO.PlayerDTO;
 import com.studentesports.backend.exceptions.NewsElementNotFoundException;
 import com.studentesports.backend.exceptions.NewsNotFoundException;
-import com.studentesports.backend.exceptions.TeamsNotFoundException;
 import com.studentesports.backend.models.News;
-import com.studentesports.backend.models.Player;
-import com.studentesports.backend.models.Team;
 import com.studentesports.backend.respositories.NewsRepository;
 import com.studentesports.backend.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +21,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,7 +89,6 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void deleteNewsById(int id) {
         News news = newsRepository.findById(id).orElseThrow(() -> new NewsElementNotFoundException("Новость не найдена"));
-        System.out.println(news);
         newsRepository.delete(news);
     }
 

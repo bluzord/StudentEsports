@@ -1,6 +1,8 @@
 package com.studentesports.backend.services.impl;
 
 import com.studentesports.backend.exceptions.ApplicationsNotFoundException;
+import com.studentesports.backend.exceptions.NewsElementNotFoundException;
+import com.studentesports.backend.models.News;
 import com.studentesports.backend.models.applications.*;
 import com.studentesports.backend.respositories.ApplicationRepository;
 import com.studentesports.backend.respositories.applications.*;
@@ -103,6 +105,38 @@ public class ApplicationServiceImpl implements ApplicationService {
         List<ApplicationSC> applications = applicationSCRepository.findAll();
         if (applications.isEmpty()) throw new ApplicationsNotFoundException("Заявки не найдены");
         return applications;
+    }
+
+    @Override
+    public void deleteApplicationById(int id) {
+        Application application = applicationRepository.findById(id).orElseThrow();
+        String game = application.getGame();
+        switch (game) {
+            case "CS2" -> {
+                ApplicationCS2 applicationCS2 = applicationCS2Repository.findById(id).orElseThrow(() -> new ApplicationsNotFoundException("Заявка не найдена"));
+                applicationCS2Repository.delete(applicationCS2);
+            }
+            case "DOTA" -> {
+                ApplicationDOTA applicationDOTA = applicationDOTARepository.findById(id).orElseThrow(() -> new ApplicationsNotFoundException("Заявка не найдена"));
+                applicationDOTARepository.delete(applicationDOTA);
+            }
+            case "LOL" -> {
+                ApplicationLOL applicationLOL = applicationLOLRepository.findById(id).orElseThrow(() -> new ApplicationsNotFoundException("Заявка не найдена"));
+                applicationLOLRepository.delete(applicationLOL);
+            }
+            case "VLR" -> {
+                ApplicationVLR applicationVLR = applicationVLRRepository.findById(id).orElseThrow(() -> new ApplicationsNotFoundException("Заявка не найдена"));
+                applicationVLRRepository.delete(applicationVLR);
+            }
+            case "SC" -> {
+                ApplicationSC applicationSC = applicationSCRepository.findById(id).orElseThrow(() -> new ApplicationsNotFoundException("Заявка не найдена"));
+                applicationSCRepository.delete(applicationSC);
+            }
+            case "TEKKEN" -> {
+                ApplicationTEKKEN applicationTEKKEN = applicationTEKKENRepository.findById(id).orElseThrow(() -> new ApplicationsNotFoundException("Заявка не найдена"));
+                applicationTEKKENRepository.delete(applicationTEKKEN);
+            }
+        }
     }
 
 }

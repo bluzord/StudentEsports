@@ -19,4 +19,6 @@ public interface ApplicationService {
     public List<ApplicationVLR> getApplicationsVLR();
     public List<ApplicationTEKKEN> getApplicationsTEKKEN();
     public List<ApplicationSC> getApplicationsSC();
+
+    public void deleteApplicationById(int id);
 }

@@ -1,13 +1,10 @@
 package com.studentesports.backend.services.impl;
 
-import com.studentesports.backend.DTO.PlayerDTO;
 import com.studentesports.backend.DTO.TeamDTO;
 import com.studentesports.backend.exceptions.TeamsNotFoundException;
-import com.studentesports.backend.models.Player;
+import com.studentesports.backend.models.players.Player;
 import com.studentesports.backend.models.Team;
-import com.studentesports.backend.respositories.PlayerRepository;
 import com.studentesports.backend.respositories.TeamRepository;
-import com.studentesports.backend.services.PlayerService;
 import com.studentesports.backend.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

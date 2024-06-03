@@ -1,5 +1,6 @@
-package com.studentesports.backend.models;
+package com.studentesports.backend.models.players;
 
+import com.studentesports.backend.models.Team;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="players")
+@Inheritance (strategy = InheritanceType.JOINED)
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +27,15 @@ public class Player {
     @JoinColumn(name = "team_id")
     private Team team;
     private String avatar;
+
+    public Player(String name, String surname, String patronymic, String nickname, String vk, String game) {
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.nickname = nickname;
+        this.vk = vk;
+        this.game = game;
+        this.team = null;
+        this.avatar = "SE.svg";
+    }
 }
