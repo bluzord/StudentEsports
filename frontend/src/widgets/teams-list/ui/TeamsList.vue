@@ -4,12 +4,13 @@ import { type TeamCardType } from '@/entities/team-card/model/TeamCard'
 
 defineProps<{
   teamsList: TeamCardType[]
+  link: string
 }>()
 </script>
 
 <template>
   <section class="teams-list">
-    <TeamCard v-for="team in teamsList" :key="team.id" :team="team"></TeamCard>
+    <TeamCard v-for="team in teamsList" :key="team.id" :team="team" :link="link"></TeamCard>
   </section>
 </template>
 

@@ -26,16 +26,10 @@
 
 <style lang="scss" scoped>
 .admin-menu {
-  -webkit-box-shadow: 21px -2px 20px -3px rgba(0, 0, 0, 0.09);
-  -moz-box-shadow: 21px -2px 20px -3px rgba(0, 0, 0, 0.09);
-  box-shadow: 21px -2px 20px -3px rgba(0, 0, 0, 0.09);
-
   min-height: 700px;
   @include flex-center;
   justify-content: flex-start;
   padding: 30px;
-
-  background-color: #363636;
 
   &__items {
     @include flex-center;

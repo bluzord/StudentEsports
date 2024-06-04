@@ -1,18 +1,20 @@
 <script setup lang="ts">
+import { TeamCard } from '..'
 import { type TeamCardType } from '../model/TeamCard'
 
 interface Props {
   team: TeamCardType
+  link: string
 }
 
 defineProps<Props>()
 </script>
 
 <template>
-  <router-link :to="`/teams/${team.id}`" class="team-card-link">
+  <router-link :to="link + team.id" class="team-card-link">
     <article class="team-card">
       <img
-        :src="`src/app/images/team-logo/${team.logo}`"
+        :src="`../src/app/images/team-logo/${team.logo}`"
         :alt="`${team.name}`"
         loading="lazy"
         class="team-card__logo"

@@ -1,6 +1,8 @@
 package com.studentesports.backend.services;
 
+import com.studentesports.backend.DTO.FreePlayerDTO;
 import com.studentesports.backend.DTO.PlayerDTO;
+import com.studentesports.backend.DTO.playersGAME.*;
 import com.studentesports.backend.models.applications.*;
 import com.studentesports.backend.models.players.*;
 
@@ -17,17 +19,17 @@ public interface PlayerService {
     public void createPlayerTEKKEN(ApplicationTEKKEN application);
     public void createPlayerSC(ApplicationSC application);
 
-    public List<PlayerCS2> getPlayersCS2();
-    public List<PlayerDOTA> getPlayersDOTA();
-    public List<PlayerLOL> getPlayersLOL();
-    public List<PlayerVLR> getPlayersVLR();
-    public List<PlayerTEKKEN> getPlayersTEKKEN();
-    public List<PlayerSC> getPlayersSC();
+    public List<PlayerCS2DTO> getPlayersCS2();
+    public List<PlayerDOTADTO> getPlayersDOTA();
+    public List<PlayerLOLDTO> getPlayersLOL();
+    public List<PlayerVLRDTO> getPlayersVLR();
+    public List<PlayerTEKKENDTO> getPlayersTEKKEN();
+    public List<PlayerSCDTO> getPlayersSC();
 
-    public List<PlayerCS2> getFreePlayersCS2();
-    public List<PlayerDOTA> getFreePlayersDOTA();
-    public List<PlayerLOL> getFreePlayersLOL();
-    public List<PlayerVLR> getFreePlayersVLR();
-    public List<PlayerTEKKEN> getFreePlayersTEKKEN();
-    public List<PlayerSC> getFreePlayersSC();
+    public List<FreePlayerDTO> getFreePlayersCS2();
+    public List<FreePlayerDTO> getFreePlayersDOTA();
+    public List<FreePlayerDTO> getFreePlayersLOL();
+    public List<FreePlayerDTO> getFreePlayersVLR();
+    public List<FreePlayerDTO> getFreePlayersTEKKEN();
+    public List<FreePlayerDTO> getFreePlayersSC();
 }

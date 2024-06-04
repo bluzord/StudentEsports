@@ -1,20 +1,21 @@
 package com.studentesports.backend.controllers;
 
-import com.studentesports.backend.DTO.NewsCardDTO;
-import com.studentesports.backend.DTO.NewsCardResponse;
-import com.studentesports.backend.DTO.NewsCreateDTO;
-import com.studentesports.backend.DTO.TeamDTO;
+import com.studentesports.backend.DTO.*;
+import com.studentesports.backend.DTO.playersGAME.*;
 import com.studentesports.backend.models.News;
+import com.studentesports.backend.models.Team;
 import com.studentesports.backend.models.applications.*;
 import com.studentesports.backend.models.players.*;
 import com.studentesports.backend.services.ApplicationService;
 import com.studentesports.backend.services.NewsService;
 import com.studentesports.backend.services.PlayerService;
+import com.studentesports.backend.services.TeamService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,11 +26,13 @@ public class AdminController {
     private final ApplicationService applicationService;
     private final NewsService newsService;
     private final PlayerService playerService;
+    private final TeamService teamService;
 
-    public AdminController(ApplicationService applicationService, NewsService newsService, PlayerService playerService) {
+    public AdminController(ApplicationService applicationService, NewsService newsService, PlayerService playerService, TeamService teamService) {
         this.applicationService = applicationService;
         this.newsService = newsService;
         this.playerService = playerService;
+        this.teamService = teamService;
     }
 
     @GetMapping("check")
@@ -55,6 +58,13 @@ public class AdminController {
                                                   @RequestParam("content")String content) throws IOException {
 
         return ResponseEntity.ok(newsService.createNews(image, title, content));
+    }
+
+    @PostMapping("teams/create")
+    public ResponseEntity<Team> createTeam(@RequestParam("logo")MultipartFile logo,
+                                           @RequestParam("name")String name,
+                                           @RequestParam("game")String game) throws IOException {
+        return ResponseEntity.ok(teamService.createTeam(logo, name, game));
     }
 
     @GetMapping("applications/cs2")
@@ -94,32 +104,32 @@ public class AdminController {
     }
 
     @GetMapping("players/cs2")
-    public ResponseEntity<List<PlayerCS2>> getCS2Players() {
+    public ResponseEntity<List<PlayerCS2DTO>> getCS2Players() {
         return ResponseEntity.ok(playerService.getPlayersCS2());
     }
 
     @GetMapping("players/dota")
-    public ResponseEntity<List<PlayerDOTA>> getDOTAPlayers() {
+    public ResponseEntity<List<PlayerDOTADTO>> getDOTAPlayers() {
         return ResponseEntity.ok(playerService.getPlayersDOTA());
     }
 
     @GetMapping("players/lol")
-    public ResponseEntity<List<PlayerLOL>> getLOLPlayers() {
+    public ResponseEntity<List<PlayerLOLDTO>> getLOLPlayers() {
         return ResponseEntity.ok(playerService.getPlayersLOL());
     }
 
     @GetMapping("players/sc")
-    public ResponseEntity<List<PlayerSC>> getSCPlayers() {
+    public ResponseEntity<List<PlayerSCDTO>> getSCPlayers() {
         return ResponseEntity.ok(playerService.getPlayersSC());
     }
 
     @GetMapping("players/tekken")
-    public ResponseEntity<List<PlayerTEKKEN>> getTEKKENPlayers() {
+    public ResponseEntity<List<PlayerTEKKENDTO>> getTEKKENPlayers() {
         return ResponseEntity.ok(playerService.getPlayersTEKKEN());
     }
 
     @GetMapping("players/vlr")
-    public ResponseEntity<List<PlayerVLR>> getVLRPlayers() {
+    public ResponseEntity<List<PlayerVLRDTO>> getVLRPlayers() {
         return ResponseEntity.ok(playerService.getPlayersVLR());
     }
 
@@ -157,6 +167,42 @@ public class AdminController {
     public ResponseEntity<String> createTEKKENPlayer(@RequestBody ApplicationTEKKEN application) {
         playerService.createPlayerTEKKEN(application);
         return ResponseEntity.ok("Игрок создан");
+    }
+
+    @GetMapping("teams/{id}")
+    public ResponseEntity<TeamComposition> getTeamForEdit(@PathVariable("id") int id) {
+        return ResponseEntity.ok(teamService.getTeamForEdit(id));
+    }
+
+    @GetMapping("players/{game}/free")
+    public ResponseEntity<List<FreePlayerDTO>> getFreePlayers(@PathVariable("game") String game) {
+        switch (game) {
+            case "CS2" -> {
+                return ResponseEntity.ok(playerService.getFreePlayersCS2());
+            }
+            case "DOTA" -> {
+                return ResponseEntity.ok(playerService.getFreePlayersDOTA());
+            }
+            case "LOL" -> {
+                return ResponseEntity.ok(playerService.getFreePlayersLOL());
+            }
+            case "VLR" -> {
+                return ResponseEntity.ok(playerService.getFreePlayersVLR());
+            }
+            case "SC2" -> {
+                return ResponseEntity.ok(playerService.getFreePlayersSC());
+            }
+            case "TEKKEN" -> {
+                return ResponseEntity.ok(playerService.getFreePlayersTEKKEN());
+            }
+        }
+        return ResponseEntity.ok(new ArrayList<>());
+    }
+
+    @PutMapping("teams/update-players")
+    public ResponseEntity<String> updateTeamPlayers(@RequestBody TeamComposition team) {
+        teamService.updateTeamPlayers(team);
+        return ResponseEntity.ok("Состав обновлен");
     }
 }
 

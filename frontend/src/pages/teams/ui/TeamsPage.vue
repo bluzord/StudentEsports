@@ -77,6 +77,7 @@ onMounted(() => {
 
     <TeamsList
       :teamsList="teamsPageStore.filteredTeams"
+      :link="`/teams/`"
       v-if="!teamsPageStore.isLoading && teamsPageStore.isSuccess"
     />
     <LoaderComponent v-if="teamsPageStore.isLoading" />

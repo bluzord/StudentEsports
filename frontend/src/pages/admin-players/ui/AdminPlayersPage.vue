@@ -21,8 +21,8 @@ type playerCS2Type = {
   steamURL: string
   faceitELO: number
   faceitURL: string
-  team: number
-  avatar: string
+  team: string
+  teamId: number
 }
 
 const playersCS2 = ref<playerCS2Type[]>([])
@@ -39,8 +39,8 @@ type playerDOTAType = {
   dotaMMR: number
   dotaPos: string
   dotaBuff: string
-  team: number
-  avatar: string
+  team: string
+  teamId: number
 }
 
 const playersDOTA = ref<playerDOTAType[]>([])
@@ -56,8 +56,8 @@ type playerLOLType = {
   riotID: string
   lolPos: string
   lolRank: string
-  team: number
-  avatar: string
+  team: string
+  teamId: number
 }
 
 const playersLOL = ref<playerLOLType[]>([])
@@ -72,8 +72,8 @@ type playerSCType = {
   game: string
   scLeague: string
   scAPM: number
-  team: number
-  avatar: string
+  team: string
+  teamId: number
 }
 
 const playersSC = ref<playerSCType[]>([])
@@ -89,8 +89,8 @@ type playerVLRType = {
   riotID: string
   vlrRole: string
   vlrRank: string
-  team: number
-  avatar: string
+  team: string
+  teamId: number
 }
 
 const playersVLR = ref<playerVLRType[]>([])
@@ -104,8 +104,8 @@ type playerTekkenType = {
   nickname: string
   game: string
   tekkenRank: string
-  team: number
-  avatar: string
+  team: string
+  teamId: number
 }
 
 const playersTEKKEN = ref<playerTekkenType[]>([])
@@ -286,7 +286,9 @@ onMounted(() => {
           <td>
             <a :href="player.faceitURL">Ссылка</a>
           </td>
-          <td><a href="/admin/teams/{{player.team}}"></a></td>
+          <td>
+            <a :href="`/admin/teams/${player.teamId}`">{{ player.team }}</a>
+          </td>
         </tr>
       </table>
 
@@ -321,7 +323,9 @@ onMounted(() => {
           <td>
             <a :href="player.dotaBuff">Ссылка</a>
           </td>
-          <td><a href="/admin/teams/{{player.team}}"></a></td>
+          <td>
+            <a :href="`/admin/teams/${player.teamId}`">{{ player.team }}</a>
+          </td>
         </tr>
       </table>
 
@@ -352,7 +356,9 @@ onMounted(() => {
           </td>
           <td>{{ player.lolPos }}</td>
           <td>{{ player.lolRank }}</td>
-          <td><a href="/admin/teams/{{player.team}}"></a></td>
+          <td>
+            <a :href="`/admin/teams/${player.teamId}`">{{ player.team }}</a>
+          </td>
         </tr>
       </table>
 
@@ -381,7 +387,9 @@ onMounted(() => {
             {{ player.scLeague }}
           </td>
           <td>{{ player.scAPM }}</td>
-          <td><a href="/admin/teams/{{player.team}}"></a></td>
+          <td>
+            <a :href="`/admin/teams/${player.teamId}`">{{ player.team }}</a>
+          </td>
         </tr>
       </table>
 
@@ -408,7 +416,9 @@ onMounted(() => {
           <td>{{ player.riotID }}</td>
           <td>{{ player.vlrRole }}</td>
           <td>{{ player.vlrRank }}</td>
-          <td><a href="/admin/teams/{{player.team}}"></a></td>
+          <td>
+            <a :href="`/admin/teams/${player.teamId}`">{{ player.team }}</a>
+          </td>
         </tr>
       </table>
 
@@ -431,7 +441,9 @@ onMounted(() => {
           <td><a :href="player.vk">Ссылка</a></td>
           <td>{{ player.nickname }}</td>
           <td>{{ player.tekkenRank }}</td>
-          <td><a href="/admin/teams/{{player.team}}"></a></td>
+          <td>
+            <a :href="`/admin/teams/${player.teamId}`">{{ player.team }}</a>
+          </td>
         </tr>
       </table>
     </section>
@@ -492,6 +504,15 @@ onMounted(() => {
     padding: 5px 10px;
     border: 1px solid #525252;
     text-align: left;
+
+    a {
+      color: var(--color-light);
+      text-decoration: underline;
+
+      @include hover {
+        color: var(--color-accent);
+      }
+    }
   }
 
   tbody tr:nth-child(odd) {

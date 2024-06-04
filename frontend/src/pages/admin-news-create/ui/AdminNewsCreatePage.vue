@@ -21,9 +21,7 @@ onMounted(() => {
 const postNewsEl = async () => {
   const formData = new FormData()
   const inputFile = document.getElementById('image') as HTMLInputElement
-  console.log(inputFile.files)
   if (inputFile.files) {
-    console.log(inputFile.files[0])
     formData.append('image', inputFile.files[0])
   }
   formData.append('title', title.value)

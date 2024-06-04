@@ -73,6 +73,7 @@ const auth = async () => {
   padding: 40px;
   gap: 40px;
   width: 100%;
+  min-height: 700px;
 
   &__invalid {
     color: #ff6e6e;

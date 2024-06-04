@@ -1,6 +1,8 @@
 package com.studentesports.backend.services.impl;
 
+import com.studentesports.backend.DTO.FreePlayerDTO;
 import com.studentesports.backend.DTO.PlayerDTO;
+import com.studentesports.backend.DTO.playersGAME.*;
 import com.studentesports.backend.exceptions.ApplicationsNotFoundException;
 import com.studentesports.backend.exceptions.PlayersNotFoundException;
 import com.studentesports.backend.models.applications.*;
@@ -139,49 +141,49 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<PlayerCS2> getPlayersCS2() {
+    public List<PlayerCS2DTO> getPlayersCS2() {
         List<PlayerCS2> playerCS2List = playerCS2Repository.findAll();
         if (playerCS2List.isEmpty()) throw new PlayersNotFoundException("Игроки не найдены");
-        return playerCS2List;
+        return playerCS2List.stream().map(this::mapCS2ToDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerDOTA> getPlayersDOTA() {
+    public List<PlayerDOTADTO> getPlayersDOTA() {
         List<PlayerDOTA> playerDOTAList = playerDOTARepository.findAll();
         if (playerDOTAList.isEmpty()) throw new PlayersNotFoundException("Игроки не найдены");
-        return playerDOTAList;
+        return playerDOTAList.stream().map(this::mapDOTAToDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerLOL> getPlayersLOL() {
+    public List<PlayerLOLDTO> getPlayersLOL() {
         List<PlayerLOL> playerLOLList = playerLOLRepository.findAll();
         if (playerLOLList.isEmpty()) throw new PlayersNotFoundException("Игроки не найдены");
-        return playerLOLList;
+        return playerLOLList.stream().map(this::mapLOLToDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerVLR> getPlayersVLR() {
+    public List<PlayerVLRDTO> getPlayersVLR() {
         List<PlayerVLR> playerVLRList = playerVLRRepository.findAll();
         if (playerVLRList.isEmpty()) throw new PlayersNotFoundException("Игроки не найдены");
-        return playerVLRList;
+        return playerVLRList.stream().map(this::mapVLRToDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerTEKKEN> getPlayersTEKKEN() {
+    public List<PlayerTEKKENDTO> getPlayersTEKKEN() {
         List<PlayerTEKKEN> playerTEKKENList = playerTEKKENRepository.findAll();
         if (playerTEKKENList.isEmpty()) throw new PlayersNotFoundException("Игроки не найдены");
-        return playerTEKKENList;
+        return playerTEKKENList.stream().map(this::mapTEKKENToDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerSC> getPlayersSC() {
+    public List<PlayerSCDTO> getPlayersSC() {
         List<PlayerSC> playerSCList = playerSCRepository.findAll();
         if (playerSCList.isEmpty()) throw new PlayersNotFoundException("Игроки не найдены");
-        return playerSCList;
+        return playerSCList.stream().map(this::mapSCToDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerCS2> getFreePlayersCS2() {
+    public List<FreePlayerDTO> getFreePlayersCS2() {
         List<PlayerCS2> playerCS2List = playerCS2Repository.findAll();
         List<PlayerCS2> result = new ArrayList<>();
         for (PlayerCS2 player : playerCS2List) {
@@ -189,11 +191,11 @@ public class PlayerServiceImpl implements PlayerService {
                 result.add(player);
             }
         }
-        return result;
+        return result.stream().map(this::mapToFreePlayer).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerDOTA> getFreePlayersDOTA() {
+    public List<FreePlayerDTO> getFreePlayersDOTA() {
         List<PlayerDOTA> playerDOTAList = playerDOTARepository.findAll();
         List<PlayerDOTA> result = new ArrayList<>();
         for (PlayerDOTA player : playerDOTAList) {
@@ -201,11 +203,11 @@ public class PlayerServiceImpl implements PlayerService {
                 result.add(player);
             }
         }
-        return result;
+        return result.stream().map(this::mapToFreePlayer).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerLOL> getFreePlayersLOL() {
+    public List<FreePlayerDTO> getFreePlayersLOL() {
         List<PlayerLOL> playerLOLList = playerLOLRepository.findAll();
         List<PlayerLOL> result = new ArrayList<>();
         for (PlayerLOL player : playerLOLList) {
@@ -213,11 +215,11 @@ public class PlayerServiceImpl implements PlayerService {
                 result.add(player);
             }
         }
-        return result;
+        return result.stream().map(this::mapToFreePlayer).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerVLR> getFreePlayersVLR() {
+    public List<FreePlayerDTO> getFreePlayersVLR() {
         List<PlayerVLR> playerVLRList = playerVLRRepository.findAll();
         List<PlayerVLR> result = new ArrayList<>();
         for (PlayerVLR player : playerVLRList) {
@@ -225,11 +227,11 @@ public class PlayerServiceImpl implements PlayerService {
                 result.add(player);
             }
         }
-        return result;
+        return result.stream().map(this::mapToFreePlayer).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerTEKKEN> getFreePlayersTEKKEN() {
+    public List<FreePlayerDTO> getFreePlayersTEKKEN() {
         List<PlayerTEKKEN> playerTEKKENList = playerTEKKENRepository.findAll();
         List<PlayerTEKKEN> result = new ArrayList<>();
         for (PlayerTEKKEN player : playerTEKKENList) {
@@ -237,11 +239,11 @@ public class PlayerServiceImpl implements PlayerService {
                 result.add(player);
             }
         }
-        return result;
+        return result.stream().map(this::mapToFreePlayer).collect(Collectors.toList());
     }
 
     @Override
-    public List<PlayerSC> getFreePlayersSC() {
+    public List<FreePlayerDTO> getFreePlayersSC() {
         List<PlayerSC> playerSCList = playerSCRepository.findAll();
         List<PlayerSC> result = new ArrayList<>();
         for (PlayerSC player : playerSCList) {
@@ -249,7 +251,126 @@ public class PlayerServiceImpl implements PlayerService {
                 result.add(player);
             }
         }
-        return result;
+        return result.stream().map(this::mapToFreePlayer).collect(Collectors.toList());
+    }
+
+    private PlayerCS2DTO mapCS2ToDTO(PlayerCS2 player) {
+        PlayerCS2DTO playerCS2DTO = new PlayerCS2DTO();
+        playerCS2DTO.setId(player.getId());
+        playerCS2DTO.setName(player.getName());
+        playerCS2DTO.setSurname(player.getSurname());
+        playerCS2DTO.setPatronymic(player.getPatronymic());
+        playerCS2DTO.setVk(player.getVk());
+        playerCS2DTO.setNickname(player.getNickname());
+        playerCS2DTO.setGame(player.getGame());
+        if (player.getTeam() != null) {
+            playerCS2DTO.setTeam(player.getTeam().getName());
+            playerCS2DTO.setTeamId(player.getTeam().getId());
+        }
+        playerCS2DTO.setSteamURL(player.getSteamURL());
+        playerCS2DTO.setFaceitELO(player.getFaceitELO());
+        playerCS2DTO.setFaceitURL(player.getFaceitURL());
+        return playerCS2DTO;
+    }
+
+    private PlayerDOTADTO mapDOTAToDTO(PlayerDOTA player) {
+        PlayerDOTADTO playerDOTADTO = new PlayerDOTADTO();
+        playerDOTADTO.setId(player.getId());
+        playerDOTADTO.setName(player.getName());
+        playerDOTADTO.setSurname(player.getSurname());
+        playerDOTADTO.setPatronymic(player.getPatronymic());
+        playerDOTADTO.setVk(player.getVk());
+        playerDOTADTO.setNickname(player.getNickname());
+        playerDOTADTO.setGame(player.getGame());
+        if (player.getTeam() != null) {
+            playerDOTADTO.setTeam(player.getTeam().getName());
+            playerDOTADTO.setTeamId(player.getTeam().getId());
+        }
+        playerDOTADTO.setSteamURL(player.getSteamURL());
+        playerDOTADTO.setDotaPos(player.getDotaPos());
+        playerDOTADTO.setDotaMMR(player.getDotaMMR());
+        playerDOTADTO.setDotaBuff(player.getDotaBuff());
+        return playerDOTADTO;
+    }
+
+    private PlayerLOLDTO mapLOLToDTO(PlayerLOL player) {
+        PlayerLOLDTO playerLOLDTO = new PlayerLOLDTO();
+        playerLOLDTO.setId(player.getId());
+        playerLOLDTO.setName(player.getName());
+        playerLOLDTO.setSurname(player.getSurname());
+        playerLOLDTO.setPatronymic(player.getPatronymic());
+        playerLOLDTO.setVk(player.getVk());
+        playerLOLDTO.setNickname(player.getNickname());
+        playerLOLDTO.setGame(player.getGame());
+        if (player.getTeam() != null) {
+            playerLOLDTO.setTeam(player.getTeam().getName());
+            playerLOLDTO.setTeamId(player.getTeam().getId());
+        }
+        playerLOLDTO.setRiotID(player.getRiotID());
+        playerLOLDTO.setLolPos(player.getLolPos());
+        playerLOLDTO.setLolRank(player.getLolRank());
+        return playerLOLDTO;
+    }
+
+    private PlayerVLRDTO mapVLRToDTO(PlayerVLR player) {
+        PlayerVLRDTO playerVLRDTO = new PlayerVLRDTO();
+        playerVLRDTO.setId(player.getId());
+        playerVLRDTO.setName(player.getName());
+        playerVLRDTO.setSurname(player.getSurname());
+        playerVLRDTO.setPatronymic(player.getPatronymic());
+        playerVLRDTO.setVk(player.getVk());
+        playerVLRDTO.setNickname(player.getNickname());
+        playerVLRDTO.setGame(player.getGame());
+        if (player.getTeam() != null) {
+            playerVLRDTO.setTeam(player.getTeam().getName());
+            playerVLRDTO.setTeamId(player.getTeam().getId());
+        }
+        playerVLRDTO.setRiotID(player.getRiotID());
+        playerVLRDTO.setVlrRank(player.getVlrRank());
+        playerVLRDTO.setVlrRole(player.getVlrRole());
+        return playerVLRDTO;
+    }
+
+    private PlayerSCDTO mapSCToDTO(PlayerSC player) {
+        PlayerSCDTO playerSCDTO = new PlayerSCDTO();
+        playerSCDTO.setId(player.getId());
+        playerSCDTO.setName(player.getName());
+        playerSCDTO.setSurname(player.getSurname());
+        playerSCDTO.setPatronymic(player.getPatronymic());
+        playerSCDTO.setVk(player.getVk());
+        playerSCDTO.setNickname(player.getNickname());
+        playerSCDTO.setGame(player.getGame());
+        if (player.getTeam() != null) {
+            playerSCDTO.setTeam(player.getTeam().getName());
+            playerSCDTO.setTeamId(player.getTeam().getId());
+        }
+        playerSCDTO.setScAPM(player.getScAPM());
+        playerSCDTO.setScLeague(player.getScLeague());
+        return playerSCDTO;
+    }
+
+    private PlayerTEKKENDTO mapTEKKENToDTO(PlayerTEKKEN player) {
+        PlayerTEKKENDTO playerTEKKENDTO = new PlayerTEKKENDTO();
+        playerTEKKENDTO.setId(player.getId());
+        playerTEKKENDTO.setName(player.getName());
+        playerTEKKENDTO.setSurname(player.getSurname());
+        playerTEKKENDTO.setPatronymic(player.getPatronymic());
+        playerTEKKENDTO.setVk(player.getVk());
+        playerTEKKENDTO.setNickname(player.getNickname());
+        playerTEKKENDTO.setGame(player.getGame());
+        if (player.getTeam() != null) {
+            playerTEKKENDTO.setTeam(player.getTeam().getName());
+            playerTEKKENDTO.setTeamId(player.getTeam().getId());
+        }
+        playerTEKKENDTO.setTekkenRank(player.getTekkenRank());
+        return playerTEKKENDTO;
+    }
+
+    private FreePlayerDTO mapToFreePlayer(Player player) {
+        FreePlayerDTO playerDTO = new FreePlayerDTO();
+        playerDTO.setId(player.getId());
+        playerDTO.setNickname(player.getNickname());
+        return playerDTO;
     }
 
     private PlayerDTO mapToDTO(Player player) {

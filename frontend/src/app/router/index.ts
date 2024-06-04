@@ -10,6 +10,9 @@ import { AdminApplicationsPage } from '@/pages/admin-applications'
 import { AdminNewsPage } from '@/pages/admin-news'
 import { AdminNewsCreatePage } from '@/pages/admin-news-create'
 import { AdminPlayersPage } from '@/pages/admin-players'
+import { AdminTeamsPage } from '@/pages/admin-teams'
+import { AdminTeamsCreatePage } from '@/pages/admin-teams-create'
+import { AdminTeamEditPage } from '@/pages/admin-team-edit'
 
 const routes = [
   {
@@ -55,6 +58,18 @@ const routes = [
   {
     path: '/admin/players',
     component: AdminPlayersPage
+  },
+  {
+    path: '/admin/teams',
+    component: AdminTeamsPage
+  },
+  {
+    path: '/admin/teams/create',
+    component: AdminTeamsCreatePage
+  },
+  {
+    path: '/admin/teams/:id',
+    component: AdminTeamEditPage
   }
 ]
 

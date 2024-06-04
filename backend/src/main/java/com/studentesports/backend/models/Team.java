@@ -28,4 +28,12 @@ public class Team {
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Player> players = new ArrayList<Player>();
+
+    public Team(String name, String game, String logo) {
+        this.name = name;
+        this.game = game;
+        this.logo = logo;
+        this.captain = null;
+        this.players = new ArrayList<>();
+    }
 }
